@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body style="margin:0">
+</head><body>
+<title>Master Cursos Paulista</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Escola Master Cursos: cursos práticos de reparo de iPhone e Android em Paulista (PE), do iniciante ao reparo avançado de placas, com o Profº Marcondes, professor com certificação internacional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800&family=Saira+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: laboratório de microeletrônica à noite. Grid 12 col / 1240px, HUD de microscópio, trilhas de placa ligando cursos. */
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{
+  color-scheme:dark;
+  --c-bg:#030305;
+  --c-surface:#0C0D11;
+  --c-surface-2:#13151B;
+  --c-line:#23262F;
+  --c-line-hi:#343949;
+  --c-text:#F2F3F5;
+  --c-muted:#A9ACB6;
+  --c-blue:#2F5BFF;
+  --c-blue-hi:#7FA4FF;
+  --c-red:#E0101B;
+  --c-red-hi:#FF6060;
+  --c-trace:rgba(127,164,255,.30);
+  --grad-blue:linear-gradient(100deg,#4467FF 0%,#6A8DFF 50%,#93B2FF 100%);
+  --grad-red:linear-gradient(100deg,#F02530 0%,#FF4A4A 55%,#FF7272 100%);
+  --btn-blue:linear-gradient(110deg,#0E2BF0 0%,#1D44FF 50%,#2F5BFF 100%);
+  --btn-red:linear-gradient(110deg,#B30C15 0%,#D0101A 50%,#E0141E 100%);
+  --glow-blue:#9DBBFF;
+  --glow-red:#FF8A8A;
+
+  --f-display:"Saira","Arial Black",system-ui,sans-serif;
+  --f-label:"Saira Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+
+  --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:32px;--s6:48px;--s7:64px;--s8:96px;--s9:128px;
+  --maxw:1240px;
+  --cut:10px;
+  --section-y:var(--s8);
+}
+@media (max-width:767px){:root{--section-y:var(--s7)}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--c-blue-hi);outline-offset:3px}
+::selection{background:var(--c-blue);color:#fff}
+
+/* malha de placa ao fundo */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(127,164,255,.10) 1px,transparent 1.2px);background-size:24px 24px;-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.35) 60%,#000 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.35) 60%,#000 100%)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:768px){.wrap{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--s4)}
+.grid>*{grid-column:1 / -1;min-width:0}
+.section{padding-block:var(--section-y)}
+
+/* tipografia */
+.eyebrow{font-family:var(--f-mono);font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-blue-hi);display:flex;align-items:center;gap:var(--s2);margin:0}
+.eyebrow .ix{color:var(--c-muted)}
+.eyebrow::before{content:"";width:8px;height:8px;border:1.5px solid currentColor;border-radius:50%;flex:none}
+.eyebrow.red{color:var(--c-red-hi)}
+.h2{font-family:var(--f-display);font-weight:800;font-size:clamp(32px,4.6vw,56px);line-height:1.04;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.t-blue{color:var(--c-blue-hi);background:var(--grad-blue);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-red{color:var(--c-red-hi);background:var(--grad-red);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-white{color:var(--c-text)}
+.lead{font-size:19px;color:var(--c-muted);max-width:56ch;margin:0;text-wrap:pretty}
+.mono{font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;color:var(--c-muted)}
+
+/* ===== BOTÕES: chanfrados + luz em looping ===== */
+.btn{--fill:var(--btn-blue);--glow:var(--glow-blue);--dim:rgba(47,91,255,.35);
+  position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:54px;padding:0 var(--s4);text-decoration:none;color:#fff;
+  font-family:var(--f-label);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;line-height:1.1;text-align:center;
+  clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));
+  background:conic-gradient(from var(--a),var(--dim) 0deg,var(--dim) 220deg,var(--glow) 300deg,#fff 330deg,var(--glow) 345deg,var(--dim) 360deg);
+  animation:spin 3.2s linear infinite;transition:transform .2s ease,filter .2s ease}
+.btn::before{content:"";position:absolute;inset:2px;z-index:-1;background:var(--fill);
+  clip-path:polygon(calc(var(--cut) - 1px) 0,100% 0,100% calc(100% - var(--cut) + 1px),calc(100% - var(--cut) + 1px) 100%,0 100%,0 calc(var(--cut) - 1px))}
+.btn::after{content:"";position:absolute;inset:2px;z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 45%);pointer-events:none}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn:active{transform:translateY(0)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-red{--fill:var(--btn-red);--glow:var(--glow-red);--dim:rgba(224,16,27,.4)}
+.btn-sm{min-height:44px;font-size:15px;padding:0 var(--s3);--cut:8px}
+@keyframes spin{to{--a:360deg}}
+
+.link-arrow{font-family:var(--f-label);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:15px;color:var(--c-muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:var(--s2)}
+.link-arrow:hover{color:var(--c-text)}
+
+/* HUD: cantoneiras de visor */
+.hud{position:relative}
+.hud>.c{position:absolute;width:22px;height:22px;border:2px solid var(--c-blue-hi);z-index:2;pointer-events:none}
+.hud>.c.tl{top:-8px;left:-8px;border-right:0;border-bottom:0}
+.hud>.c.tr{top:-8px;right:-8px;border-left:0;border-bottom:0}
+.hud>.c.bl{bottom:-8px;left:-8px;border-right:0;border-top:0}
+.hud>.c.br{bottom:-8px;right:-8px;border-left:0;border-top:0;border-color:var(--c-red-hi)}
+
+/* ===== HEADER ===== */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(3,3,5,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--c-line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);min-height:72px}
+.top-logo{display:flex;align-items:center;text-decoration:none}
+.top-logo img{height:40px;width:auto;mix-blend-mode:lighten}
+.top-nav{display:flex;align-items:center;gap:var(--s4)}
+.top-nav a.nl{font-family:var(--f-label);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--c-muted);text-decoration:none;padding-block:var(--s2)}
+.top-nav a.nl:hover{color:var(--c-text)}
+@media (max-width:1023px){.top-nav a.nl{display:none}}
+@media (max-width:420px){.top .btn span{display:none}.top .btn{width:48px;padding:0}}
+
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;padding-block:var(--s7) var(--s8)}
+.hero-traces{position:absolute;inset:0;pointer-events:none}
+.hero-traces svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.hero .grid{position:relative;row-gap:var(--s7);align-items:center}
+.hero-copy{display:flex;flex-direction:column;gap:var(--s4)}
+@media (min-width:1024px){
+  .hero{padding-block:var(--s8) var(--s9)}
+  .hero-copy{grid-column:1 / span 7}
+  .hero-art{grid-column:9 / span 4}
+}
+.h1{font-family:var(--f-display);font-weight:800;font-size:clamp(40px,6.2vw,80px);line-height:.98;letter-spacing:-.025em;margin:0;text-wrap:balance}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4)}
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--c-line);background:rgba(12,13,17,.7)}
+.spec>div{padding:var(--s3);border-left:1px solid var(--c-line);display:flex;flex-direction:column;gap:var(--s1);min-width:0}
+.spec>div:first-child{border-left:0}
+.spec .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-muted)}
+.spec .v{font-family:var(--f-label);font-weight:700;font-size:18px;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+@media (max-width:520px){.spec{grid-template-columns:1fr}.spec>div{border-left:0;border-top:1px solid var(--c-line)}.spec>div:first-child{border-top:0}}
+
+.hero-art{max-width:420px;width:100%;margin-inline:auto}
+.scope{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--c-surface)}
+.scope img{width:100%;height:100%;object-fit:cover}
+.scope::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(3,3,5,.15) 0%,transparent 30%,transparent 60%,rgba(3,3,5,.85) 100%),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)}
+.scope .scan{position:absolute;left:0;right:0;top:0;height:30%;z-index:1;background:linear-gradient(180deg,transparent,rgba(127,164,255,.18) 85%,rgba(157,187,255,.55) 100%);mix-blend-mode:screen;animation:scan 4.5s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(340%)}}
+.scope .cross{position:absolute;z-index:2;left:50%;top:46%;width:64px;height:64px;transform:translate(-50%,-50%);border:1.5px solid rgba(157,187,255,.8);border-radius:50%}
+.scope .cross::before,.scope .cross::after{content:"";position:absolute;background:rgba(157,187,255,.8)}
+.scope .cross::before{left:50%;top:-14px;bottom:-14px;width:1.5px;transform:translateX(-50%)}
+.scope .cross::after{top:50%;left:-14px;right:-14px;height:1.5px;transform:translateY(-50%)}
+.readout{position:absolute;z-index:3;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--c-text);background:rgba(3,3,5,.78);border:1px solid var(--c-line-hi);padding:var(--s1) var(--s2);display:flex;align-items:center;gap:var(--s2);white-space:nowrap}
+.readout .dot{width:7px;height:7px;border-radius:50%;background:#3BE07A;box-shadow:0 0 8px #3BE07A;animation:blink 1.6s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.readout.r1{top:var(--s3);left:var(--s3)}
+.readout.r2{bottom:var(--s3);left:var(--s3);right:var(--s3);justify-content:space-between;white-space:normal}
+.readout.r2 b{font-weight:500;color:var(--c-blue-hi)}
+
+/* ===== CERTIFICAÇÃO ===== */
+.cert{border-block:1px solid var(--c-line);background:linear-gradient(90deg,rgba(224,16,27,.08),transparent 40%),var(--c-surface)}
+.cert .grid{row-gap:var(--s6);align-items:center;padding-block:var(--s7)}
+.cert-copy{display:flex;flex-direction:column;gap:var(--s4)}
+.cert-photo{max-width:440px;width:100%;margin-inline:auto}
+.cert-photo .ph{aspect-ratio:4/5;overflow:hidden}
+.cert-photo img{width:100%;height:100%;object-fit:cover}
+@media (min-width:1024px){.cert-copy{grid-column:1 / span 6}.cert-photo{grid-column:8 / span 5}}
+.countries{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--c-line)}
+.countries li{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s2);padding:var(--s3);border-left:1px solid var(--c-line);min-width:0}
+.countries li:first-child{border-left:0}
+.countries svg{width:36px;height:24px;display:block;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.countries span{font-family:var(--f-label);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:640px){.countries{grid-template-columns:repeat(2,minmax(0,1fr))}.countries li{border-left:0;border-top:1px solid var(--c-line)}.countries li:nth-child(even){border-left:1px solid var(--c-line)}.countries li:nth-child(-n+2){border-top:0}.countries li:last-child{grid-column:1 / -1}}
+
+/* ===== TRILHA ===== */
+.sec-head{display:grid;gap:var(--s4);margin-bottom:var(--s7)}
+@media (min-width:1024px){.sec-head{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--s4);align-items:end}.sec-head>*{grid-column:1 / -1}.sec-head .h2{grid-column:1 / span 7}.sec-head .lead{grid-column:8 / span 5}}
+
+.track{display:grid;gap:var(--s4);position:relative;padding-left:var(--s5)}
+.track::before{content:"";position:absolute;left:7px;top:var(--s4);bottom:var(--s4);width:2px;background:linear-gradient(var(--c-blue-hi),var(--c-blue-hi) 65%,var(--c-red-hi))}
+.course{position:relative;background:var(--c-surface);border:1px solid var(--c-line);padding:var(--s5);display:flex;flex-direction:column;gap:var(--s3);min-width:0;
+  clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)}
+.course .top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s3)}
+.course .num{font-family:var(--f-display);font-weight:800;font-size:72px;line-height:.85;letter-spacing:-.03em}
+.course .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-muted);border:1px solid var(--c-line-hi);padding:2px var(--s2);white-space:nowrap}
+.course .lvl{font-family:var(--f-label);font-weight:600;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-blue-hi)}
+.course.c04 .lvl{color:var(--c-red-hi)}
+.course h3{font-family:var(--f-display);font-weight:700;font-size:23px;line-height:1.2;margin:0;text-wrap:balance}
+.course p{margin:0;color:var(--c-muted)}
+.course .btn{margin-top:auto;width:100%;white-space:nowrap;font-size:16px;padding:0 var(--s3)}
+@media (max-width:420px){.course{padding:var(--s4)}}
+.course.start{border-color:rgba(127,164,255,.45);background:radial-gradient(120% 80% at 0% 0%,rgba(47,91,255,.20),transparent 60%),var(--c-surface)}
+.course .meter{display:flex;gap:4px}
+.course .meter i{width:18px;height:6px;background:var(--c-line-hi)}
+.course .meter i.on{background:var(--c-blue-hi);box-shadow:0 0 8px rgba(127,164,255,.6)}
+.course.c04 .meter i.on{background:var(--c-red-hi);box-shadow:0 0 8px rgba(255,96,96,.6)}
+.branch-label{font-family:var(--f-mono);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-blue-hi);display:flex;align-items:center;gap:var(--s2);margin:var(--s3) 0 0;position:relative}
+.branch-label.and{color:var(--c-red-hi)}
+.course.ask{background:transparent;border:1px dashed var(--c-line-hi);clip-path:none}
+.node{position:absolute;left:calc(-1 * var(--s5) + 1px);width:14px;height:14px;border-radius:50%;background:var(--c-bg);border:2px solid var(--c-blue-hi);top:var(--s5)}
+.branch-label .node{top:50%;transform:translateY(-50%);background:currentColor;border-color:currentColor}
+.c04 .node{border-color:var(--c-red-hi)}
+.ask .node{border-style:dashed;border-color:var(--c-muted)}
+.course .node{display:block}
+.course{overflow:visible}
+.track>.course{clip-path:none}
+
+@media (min-width:768px){
+  .track{padding-left:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4);align-items:stretch}
+  .track::before{display:none}
+  .node{display:none!important}
+}
+@media (min-width:1200px){
+  .track{grid-template-columns:repeat(4,minmax(0,1fr));padding-top:var(--s5)}
+  .track::before{display:block;content:"";position:absolute;left:12.5%;right:12.5%;top:0;bottom:auto;width:auto;height:2px;background:linear-gradient(90deg,var(--c-blue-hi),var(--c-blue-hi) 66%,var(--c-red-hi))}
+  .track::after{content:"";position:absolute;top:-2px;left:12.5%;width:40px;height:6px;border-radius:3px;background:#fff;box-shadow:0 0 12px var(--glow-blue);animation:bus-run 4s linear infinite}
+  .track>.course::before{content:"";position:absolute;left:50%;top:calc(-1 * var(--s5) - 1px);width:2px;height:var(--s5);background:var(--c-blue-hi);transform:translateX(-50%)}
+  .track>.course.c04::before{background:var(--c-red-hi)}
+  .track>.course::after{content:"";position:absolute;left:50%;top:calc(-1 * var(--s5) - 7px);width:14px;height:14px;border-radius:50%;transform:translateX(-50%);background:var(--c-bg);border:2px solid var(--c-blue-hi)}
+  .track>.course.c04::after{border-color:var(--c-red-hi)}
+  .course .lvl{min-height:3.2em}
+}
+@keyframes bus-run{from{transform:translateX(0)}to{transform:translateX(var(--bus-w,900px))}}
+.wire,.bus{display:none}
+@keyframes pulse-wire{from{transform:translateX(0)}to{transform:translateX(50px)}}
+
+/* ===== PRÁTICA ===== */
+.practice .grid{row-gap:var(--s6);align-items:center}
+.practice-media{max-width:460px;width:100%;margin-inline:auto}
+.practice-media .ph{aspect-ratio:4/5;overflow:hidden}
+.practice-media img{width:100%;height:100%;object-fit:cover}
+.practice-copy{display:flex;flex-direction:column;gap:var(--s4)}
+@media (min-width:1024px){.practice-media{grid-column:1 / span 5}.practice-copy{grid-column:7 / span 6}}
+.practice-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--c-line)}
+.practice-list li{display:grid;grid-template-columns:var(--s7) 1fr;gap:var(--s3);padding-block:var(--s4);border-bottom:1px solid var(--c-line);align-items:baseline}
+.practice-list .k{font-family:var(--f-mono);font-size:13px;color:var(--c-blue-hi)}
+.practice-list h3{font-family:var(--f-display);font-weight:700;font-size:24px;margin:0 0 var(--s1);line-height:1.2}
+.practice-list p{margin:0;color:var(--c-muted)}
+
+/* ===== CARROSSEIS ===== */
+.carousel{position:relative}
+.car-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s6)}
+.car-head .txt{display:flex;flex-direction:column;gap:var(--s4);max-width:720px}
+.car-ctrl{display:flex;align-items:center;gap:var(--s3)}
+.car-count{font-family:var(--f-mono);font-size:14px;color:var(--c-muted);min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+.car-count b{color:var(--c-text);font-weight:500}
+.car-btn{width:48px;height:48px;display:grid;place-items:center;background:var(--c-surface);border:1px solid var(--c-line-hi);color:var(--c-text);cursor:pointer;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);transition:background-color .2s,border-color .2s}
+.car-btn:hover{background:var(--c-surface-2);border-color:var(--c-blue-hi)}
+.car-btn svg{width:20px;height:20px}
+.car-btn:disabled{opacity:.35;cursor:default}
+.track-x{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - var(--s4) * 1) / 1.35);gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:0;padding-bottom:var(--s3);scrollbar-width:none;overscroll-behavior-x:contain}
+.track-x::-webkit-scrollbar{display:none}
+@media (min-width:600px){.track-x{grid-auto-columns:calc((100% - var(--s4) * 2) / 2.4)}}
+@media (min-width:900px){.track-x{grid-auto-columns:calc((100% - var(--s4) * 3) / 3.4)}}
+@media (min-width:1200px){.track-x{grid-auto-columns:calc((100% - var(--s4) * 3) / 4)}}
+.track-x>*{scroll-snap-align:start;min-width:0}
+.progress{height:2px;background:var(--c-line);margin-top:var(--s3);position:relative;overflow:hidden}
+.progress i{position:absolute;left:0;top:0;bottom:0;width:20%;background:var(--grad-blue);transition:transform .25s ease}
+
+/* depoimentos com som */
+.vcard{position:relative;aspect-ratio:9/16;background:var(--c-surface);border:1px solid var(--c-line);overflow:hidden}
+.vcard video{width:100%;height:100%;object-fit:cover;background:#000}
+.vcard .play{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:var(--s3);background:linear-gradient(180deg,rgba(3,3,5,.5),transparent 30%,transparent 55%,rgba(3,3,5,.9));border:0;color:#fff;cursor:pointer;text-align:left;font:inherit;width:100%}
+.vcard .play .tagline{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:var(--s2)}
+.vcard .play .tagline i{width:7px;height:7px;border-radius:50%;background:var(--c-red);box-shadow:0 0 8px var(--c-red)}
+.vcard .play .mid{align-self:center;width:76px;height:76px;display:grid;place-items:center;position:relative}
+.vcard .play .mid::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--btn-red);box-shadow:0 0 0 8px rgba(224,16,27,.22),0 0 30px rgba(224,16,27,.5)}
+.vcard .play .mid svg{position:relative;width:28px;height:28px;margin-left:4px}
+.vcard .play .bot{display:flex;flex-direction:column;gap:var(--s1)}
+.vcard .play .bot b{font-family:var(--f-display);font-weight:700;font-size:20px}
+.vcard .play .bot span{font-family:var(--f-mono);font-size:12px;color:var(--c-muted);letter-spacing:.06em}
+.vcard.on .play{display:none}
+.vcard:hover .play .mid::before{transform:scale(1.06);transition:transform .2s}
+
+/* vídeos sem som */
+.mcard{position:relative;aspect-ratio:9/16;background:var(--c-surface);border:1px solid var(--c-line);overflow:hidden}
+.mcard video{width:100%;height:100%;object-fit:cover}
+.mcard .lbl{position:absolute;z-index:2;left:var(--s2);top:var(--s2);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;background:rgba(3,3,5,.75);border:1px solid var(--c-line-hi);padding:2px var(--s2);display:flex;gap:var(--s2);align-items:center}
+.mcard .lbl i{width:6px;height:6px;border-radius:50%;background:#3BE07A}
+.mcard::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+
+/* ===== PROFESSOR ===== */
+.prof{background:var(--c-surface);border-block:1px solid var(--c-line)}
+.prof .grid{row-gap:var(--s6);align-items:center}
+.prof-photo{max-width:460px;width:100%;margin:0 auto}
+.prof-photo .ph{aspect-ratio:4/5;overflow:hidden}
+.prof-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.prof-photo .nameplate{position:absolute;z-index:3;left:var(--s3);bottom:var(--s3);background:var(--c-bg);padding:var(--s2) var(--s3);display:flex;flex-direction:column;border-left:3px solid var(--c-red)}
+.prof-photo .nameplate b{font-family:var(--f-display);font-size:18px;font-weight:700}
+.prof-photo .nameplate span{font-family:var(--f-mono);font-size:11px;color:var(--c-muted);letter-spacing:.1em;text-transform:uppercase}
+.prof-copy{display:flex;flex-direction:column;gap:var(--s4)}
+@media (min-width:1024px){.prof-photo{grid-column:1 / span 5;margin:0}.prof-copy{grid-column:7 / span 6}}
+.quote{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,2.4vw,30px);line-height:1.35;margin:0;padding-left:var(--s4);border-left:2px solid var(--c-blue)}
+
+/* ===== GALERIA ===== */
+.gal-feat{display:grid;gap:var(--s4);margin-bottom:var(--s4)}
+@media (min-width:768px){.gal-feat{grid-template-columns:1fr 1fr}}
+.gal-feat figure,.gal-grid figure{margin:0;position:relative;overflow:hidden;border:1px solid var(--c-line);background:var(--c-surface)}
+.gal-feat figure{aspect-ratio:4/3}
+.gal-feat img,.gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.gal-feat figure:hover img,.gal-grid figure:hover img{transform:scale(1.04)}
+.gal-feat figcaption{position:absolute;left:var(--s3);bottom:var(--s3);z-index:2;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:rgba(3,3,5,.8);border:1px solid var(--c-line-hi);padding:var(--s1) var(--s2)}
+.gal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+@media (min-width:768px){.gal-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.gal-grid figure{aspect-ratio:4/5}
+
+/* ===== FAQ ===== */
+.faq .grid{row-gap:var(--s6)}
+.faq-head{display:flex;flex-direction:column;gap:var(--s4)}
+@media (min-width:1024px){.faq-head{grid-column:1 / span 4;position:sticky;top:112px;align-self:start}.faq-list{grid-column:6 / span 7}}
+.faq-list{border-top:1px solid var(--c-line)}
+details{border-bottom:1px solid var(--c-line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s3);min-height:64px;padding-block:var(--s3);font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.3}
+summary::-webkit-details-marker{display:none}
+summary .q{font-family:var(--f-mono);font-size:12px;color:var(--c-blue-hi);font-weight:500;margin-right:var(--s2)}
+summary .pm{flex:none;width:24px;height:24px;position:relative}
+summary .pm::before,summary .pm::after{content:"";position:absolute;left:4px;right:4px;top:11px;height:2px;background:var(--c-blue-hi);transition:transform .2s ease}
+summary .pm::after{transform:rotate(90deg)}
+details[open] summary .pm::after{transform:rotate(0)}
+.ans{padding-bottom:var(--s4);color:var(--c-muted);max-width:60ch;display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start}
+.ans p{margin:0}
+
+/* ===== CTA FINAL ===== */
+.final-box{position:relative;overflow:hidden;border:1px solid var(--c-line);display:grid;min-height:0}
+.final-bg{position:absolute;inset:0}
+.final-bg img{width:100%;height:100%;object-fit:cover;opacity:.32;filter:grayscale(.3)}
+.final-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,3,5,.96) 0%,rgba(3,3,5,.85) 50%,rgba(3,3,5,.55) 100%),radial-gradient(80% 120% at 100% 0%,rgba(224,16,27,.22),transparent 60%)}
+.final-in{position:relative;z-index:1;padding:var(--s6) var(--s4);display:flex;flex-direction:column;gap:var(--s5)}
+@media (min-width:768px){.final-in{padding:var(--s8) var(--s7)}}
+.motto{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,5.4vw,72px);line-height:1.02;letter-spacing:-.02em;margin:0;display:flex;flex-direction:column}
+.final-row{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center}
+.final-row p{margin:0;color:var(--c-text);font-size:19px;max-width:40ch}
+
+/* ===== LOCALIZAÇÃO + MAPA ===== */
+.local .grid{row-gap:var(--s6);align-items:stretch}
+.local-info{display:flex;flex-direction:column;gap:var(--s5)}
+@media (min-width:1024px){.local-info{grid-column:1 / span 5}.map-wrap{grid-column:6 / span 7}}
+.info-list{display:grid;gap:var(--s4)}
+.info{border-top:1px solid var(--c-line);padding-top:var(--s3);display:flex;flex-direction:column;gap:var(--s1);min-width:0}
+.info .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-muted)}
+.info .v{font-family:var(--f-display);font-weight:700;font-size:21px;line-height:1.3;overflow-wrap:anywhere;text-decoration:none}
+.info a.v:hover{color:var(--c-blue-hi)}
+.nav-btns{display:flex;flex-wrap:wrap;gap:var(--s3)}
+.map-wrap{min-height:420px}
+.map{position:relative;height:100%;min-height:420px;overflow:hidden;border:1px solid var(--c-line);background:#0A0C12}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(185deg) saturate(.75) brightness(.95) contrast(.95)}
+.map-fallback{position:absolute;inset:0}
+.map-fallback svg{width:100%;height:100%;display:block}
+.map .coord{position:absolute;z-index:4;left:var(--s3);top:var(--s3);font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;background:rgba(3,3,5,.82);border:1px solid var(--c-line-hi);padding:var(--s1) var(--s2)}
+.map .coord b{color:var(--c-blue-hi);font-weight:500}
+.map .addr-chip{position:absolute;z-index:4;left:var(--s3);right:var(--s3);bottom:var(--s3);display:flex;justify-content:space-between;gap:var(--s3);align-items:center;background:rgba(3,3,5,.86);border:1px solid var(--c-line-hi);padding:var(--s2) var(--s3);font-family:var(--f-label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:15px}
+.map .addr-chip span:last-child{font-family:var(--f-mono);font-size:11px;color:var(--c-muted);text-transform:none;letter-spacing:.04em}
+/* pin 3D pulsante */
+.pin{position:absolute;z-index:3;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.pin .ring{position:absolute;left:-40px;top:-14px;width:80px;height:28px;border-radius:50%;border:2px solid rgba(80,125,255,.9);transform:scale(.3);opacity:0;animation:ring 2.2s ease-out infinite}
+.pin .ring.b{animation-delay:1.1s}
+.pin .shadow{position:absolute;left:-14px;top:-5px;width:28px;height:10px;border-radius:50%;background:radial-gradient(rgba(0,0,0,.75),transparent 70%);animation:shadow 2.2s ease-in-out infinite}
+.pin .body{position:absolute;left:-22px;top:-62px;width:44px;height:44px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  background:radial-gradient(circle at 30% 30%,#B7CAFF 0%,#4F7BFF 28%,#1A3BF0 62%,#0A1A8A 100%);
+  box-shadow:inset -4px -6px 10px rgba(0,0,20,.55),inset 3px 3px 6px rgba(255,255,255,.35),0 8px 18px rgba(26,59,240,.55);animation:bob 2.2s ease-in-out infinite}
+.pin .body::after{content:"";position:absolute;left:13px;top:13px;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#DCE6FF 60%,#9DB4FF);box-shadow:inset 0 -2px 3px rgba(0,0,60,.35)}
+@keyframes ring{0%{transform:scale(.3);opacity:1}100%{transform:scale(1.8);opacity:0}}
+@keyframes bob{0%,100%{transform:rotate(-45deg) translate(0,0)}50%{transform:rotate(-45deg) translate(4px,-4px)}}
+@keyframes shadow{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.8);opacity:.6}}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--c-line);padding-block:var(--s6)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:var(--s4) var(--s5);align-items:center;justify-content:space-between;font-size:15px;color:var(--c-muted)}
+footer img{width:140px;height:auto;mix-blend-mode:lighten}
+footer .soc{display:flex;gap:var(--s4)}
+footer .soc a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none;font-family:var(--f-label);letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+footer .soc a:hover{color:var(--c-text)}
+
+/* WhatsApp flutuante (mobile) */
+.btn.fab{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;width:62px;height:62px;min-height:0;padding:0;gap:0;border-radius:50%;clip-path:none;box-shadow:0 10px 28px rgba(0,0,0,.6),0 0 24px rgba(47,91,255,.45);transition:opacity .25s ease,transform .25s ease}
+.btn.fab::before,.btn.fab::after{clip-path:none;border-radius:50%;inset:3px}
+.btn.fab svg{width:30px;height:30px}
+.fab.off{opacity:0;transform:translateY(16px);pointer-events:none}
+@media (min-width:1024px){.fab{display:none}}
+@media (max-width:1023px){footer{padding-bottom:calc(var(--s6) + 80px)}}
+
+
+/* trilhas laterais com parallax de rolagem */
+.rail{position:fixed;top:0;bottom:0;width:120px;z-index:0;pointer-events:none;overflow:hidden;opacity:.55;-webkit-mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent)}
+.rail.left{left:0}.rail.right{right:0}
+.rail svg{position:absolute;left:0;top:0;width:120px;height:1600px;will-change:transform}
+.rail .rt{opacity:.45}
+.rail .rd{fill:var(--c-bg);opacity:.8}
+.rail .rp{stroke-width:2.2;stroke-dasharray:18 782;stroke-dashoffset:var(--o,0);filter:drop-shadow(0 0 4px currentColor)}
+@media (max-width:1279px){.rail{width:56px;opacity:.35}.rail.right svg{left:auto;right:0}.rail.left svg{left:-64px}}
+@media (max-width:767px){.rail{display:none}}
+main,header,footer{position:relative;z-index:1}
+.top{position:sticky}
+/* revelação suave das seções */
+.rv{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.pre{transform:translateY(28px)}
+
+
+/* faixas coloridas */
+.band-red,.band-blue{position:relative;overflow:hidden;border:0;--c-muted:rgba(255,255,255,.88);--c-line:rgba(255,255,255,.28);--c-line-hi:rgba(255,255,255,.4);--c-surface:rgba(0,0,0,.18)}
+.band-red{background:linear-gradient(120deg,#6E0610 0%,#A50B15 40%,#D30F1A 75%,#E8202A 100%)}
+.band-blue{background:linear-gradient(120deg,#050F55 0%,#0A23C8 45%,#1A44FF 80%,#3563FF 100%)}
+.band-red::before,.band-blue::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.3px);background-size:24px 24px;-webkit-mask-image:linear-gradient(90deg,#000,transparent 70%);mask-image:linear-gradient(90deg,#000,transparent 70%)}
+.band-red::after,.band-blue::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;pointer-events:none;background:radial-gradient(closest-side,rgba(255,255,255,.16),transparent)}
+.band-red>.wrap,.band-blue>.wrap{position:relative;z-index:1}
+.band-red .eyebrow,.band-blue .eyebrow{color:#fff}
+.band-red .hud>.c,.band-blue .hud>.c{border-color:#fff}
+.band-red .lead,.band-blue .lead{color:rgba(255,255,255,.9)}
+.band-red .countries{background:rgba(0,0,0,.2)}
+.band-blue .quote{border-left-color:#fff}
+.band-blue .prof-photo .nameplate{border-left-color:#fff;background:#050F55}
+
+
+.prof-cert{display:flex;flex-direction:column;gap:var(--s3);padding-top:var(--s4);border-top:1px solid var(--c-line)}
+.prof-cert-t{font-family:var(--f-display);font-weight:800;font-size:clamp(24px,2.6vw,32px);line-height:1.1;margin:0;color:#fff}
+.prof-cert p{margin:0;color:rgba(255,255,255,.9);max-width:52ch}
+.band-blue .countries{background:rgba(0,0,0,.22)}
+.band-red .practice-list .k{color:#fff}
+.band-red .practice-list p{color:rgba(255,255,255,.9)}
+
+/* entrada */
+@keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+.hero-copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero-copy>*:nth-child(2){animation-delay:.06s}.hero-copy>*:nth-child(3){animation-delay:.12s}.hero-copy>*:nth-child(4){animation-delay:.18s}.hero-copy>*:nth-child(5){animation-delay:.24s}
+@keyframes flow{to{stroke-dashoffset:-400}}
+.flow{stroke-dasharray:14 386;animation:flow 5s linear infinite}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .btn{background:linear-gradient(110deg,var(--glow),var(--dim))}
+}
+</style>
+
+<div class="rail left" aria-hidden="true"><svg viewBox="0 0 120 1600" width="120" height="1600" fill="none" stroke-width="1.4"><g><g transform="translate(0 0)"><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="70" cy="150" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="100" cy="330" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="80" cy="540" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--glow-red)" class="rp"/><circle cx="54" cy="90" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="270" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="44" cy="460" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="680" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="30" cy="60" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="230" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="24" cy="416" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="596" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--glow-red)" class="rp"/><circle cx="92" cy="220" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="112" cy="380" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M20 0 V500 L40 520 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M20 0 V500 L40 520 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="40" cy="520" r="3" stroke="var(--c-blue-hi)" class="rd"/></g><g transform="translate(0 800)"><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="70" cy="150" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="100" cy="330" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="80" cy="540" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--glow-red)" class="rp"/><circle cx="54" cy="90" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="270" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="44" cy="460" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="680" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="30" cy="60" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="230" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="24" cy="416" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="596" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--glow-red)" class="rp"/><circle cx="92" cy="220" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="112" cy="380" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M20 0 V500 L40 520 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M20 0 V500 L40 520 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="40" cy="520" r="3" stroke="var(--c-blue-hi)" class="rd"/></g></g></svg></div><div class="rail right" aria-hidden="true"><svg viewBox="0 0 120 1600" width="120" height="1600" fill="none" stroke-width="1.4"><g transform="scale(-1 1) translate(-120 0)"><g transform="translate(0 0)"><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="70" cy="150" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="100" cy="330" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="80" cy="540" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--glow-red)" class="rp"/><circle cx="54" cy="90" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="270" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="44" cy="460" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="680" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="30" cy="60" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="230" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="24" cy="416" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="596" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--glow-red)" class="rp"/><circle cx="92" cy="220" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="112" cy="380" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M20 0 V500 L40 520 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M20 0 V500 L40 520 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="40" cy="520" r="3" stroke="var(--c-blue-hi)" class="rd"/></g><g transform="translate(0 800)"><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M100 0 V120 L70 150 V300 L100 330 V520 L80 540 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="70" cy="150" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="100" cy="330" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="80" cy="540" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M84 0 V60 L54 90 V240 L84 270 V420 L44 460 V640 L84 680 V800" stroke="var(--glow-red)" class="rp"/><circle cx="54" cy="90" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="270" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="44" cy="460" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="84" cy="680" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M60 0 V30 L30 60 V200 L60 230 V380 L24 416 V560 L60 596 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="30" cy="60" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="230" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="24" cy="416" r="3" stroke="var(--c-blue-hi)" class="rd"/><circle cx="60" cy="596" r="3" stroke="var(--c-blue-hi)" class="rd"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--c-red-hi)" class="rt"/><path d="M112 0 V200 L92 220 V360 L112 380 V700 L96 716 V800" stroke="var(--glow-red)" class="rp"/><circle cx="92" cy="220" r="3" stroke="var(--c-red-hi)" class="rd"/><circle cx="112" cy="380" r="3" stroke="var(--c-red-hi)" class="rd"/><path d="M20 0 V500 L40 520 V800" stroke="var(--c-blue-hi)" class="rt"/><path d="M20 0 V500 L40 520 V800" stroke="var(--glow-blue)" class="rp"/><circle cx="40" cy="520" r="3" stroke="var(--c-blue-hi)" class="rd"/></g></g></svg></div>
+<header class="top">
+  <div class="wrap">
+    <a class="top-logo" href="#inicio" aria-label="Master Cursos, voltar ao início"><img src="media/logo-wordmark.jpg" width="520" height="93" alt="Master Cursos, Centro de Capacitação em Smartphone"></a>
+    <nav class="top-nav" aria-label="Navegação principal">
+      <a class="nl" href="#cursos">Cursos</a>
+      <a class="nl" href="#depoimentos">Depoimentos</a>
+      <a class="nl" href="#professor">Professor</a>
+      <a class="nl" href="#laboratorio">Laboratório</a>
+      <a class="nl" href="#local">Localização</a>
+      <a class="btn btn-sm" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg><span>WhatsApp</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="hero-traces" aria-hidden="true">
+      <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" fill="none" stroke="var(--c-trace)" stroke-width="1.4">
+        <path d="M1440 90H1180l-40 40H980"/><circle cx="976" cy="130" r="4"/>
+        <path d="M1440 140H1220l-30 30H1060"/><circle cx="1056" cy="170" r="4"/>
+        <path d="M1440 640H1200l-50-50H1010"/><circle cx="1006" cy="590" r="4"/>
+        <path d="M1440 690H1160l-30-30H940"/><circle cx="936" cy="660" r="4"/>
+        <path d="M0 700H180l40-40H420"/><circle cx="424" cy="660" r="4"/>
+        <path d="M0 40H120l30 30H300"/><circle cx="304" cy="70" r="4"/>
+        <path class="flow" d="M1440 90H1180l-40 40H980" stroke="var(--glow-blue)" stroke-width="2.4"/>
+        <path class="flow" d="M1440 690H1160l-30-30H940" stroke="var(--glow-red)" stroke-width="2.4" style="animation-delay:-2.5s"/>
+        <path class="flow" d="M0 700H180l40-40H420" stroke="var(--glow-blue)" stroke-width="2.4" style="animation-delay:-1.2s"/>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Centro de capacitação em smartphones · Paulista – PE</p>
+          <h1 class="h1" id="h1"><span class="t-blue">Aprenda a consertar iPhone e Android,</span> <span class="t-red">do zero ao reparo de placa.</span></h1>
+          <p class="lead">Referência em cursos de reparos de smartphones, com aulas focadas na prática e professor com certificação internacional.</p>
+          <div class="hero-actions">
+            <a class="btn btn-red" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>Quero minha vaga pelo WhatsApp</a>
+            <a class="link-arrow" href="#cursos">Ver os 4 cursos <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="spec" role="list" aria-label="Resumo">
+            <div role="listitem"><span class="k">Plataformas</span><span class="v">iPhone · Android</span></div>
+            <div role="listitem"><span class="k">Níveis</span><span class="v">Iniciante → Avançado</span></div>
+            <div role="listitem"><span class="k">Professor</span><span class="v">Certificação internacional</span></div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="hud">
+            <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+            <div class="scope">
+              <img src="media/hero-bancada.jpg" width="960" height="1200" alt="Aluno usando microscópio e estação de solda para reparar uma placa de iPhone na bancada da Master Cursos" fetchpriority="high">
+              <span class="scan" aria-hidden="true"></span>
+              <span class="cross" aria-hidden="true"></span>
+              <span class="readout r1"><span class="dot"></span>REC · BANCADA</span>
+              <span class="readout r2"><span>REPARO DE <b>PLACA</b></span><span>iPhone</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRILHA DE CURSOS -->
+  <section class="section" id="cursos" aria-labelledby="cursos-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span>Os 4 cursos</span></p>
+        <h2 class="h2 t-blue" id="cursos-t">Do primeiro parafuso à placa: escolha seu nível</h2>
+        <p class="lead">Diagnóstico, manutenção e reparo de smartphones Android e iPhone, desde os primeiros passos até técnicas avançadas de reparo de placas.</p>
+      </div>
+
+      <div class="track">
+        <article class="course c01">
+          <span class="node" aria-hidden="true"></span>
+          <div class="top-row"><span class="num t-red">01</span><span class="tag">Porta de entrada</span></div>
+          <span class="lvl">Iniciante → Intermediário</span>
+          <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <h3>Iniciante ao Intermediário em iPhone e Android</h3>
+          <p>Nunca abriu um celular? Comece aqui. Você aprende iPhone e Android do zero até o nível intermediário.</p>
+          <a class="btn btn-red" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20Curso%2001%20%E2%80%93%20Iniciante%20ao%20Intermedi%C3%A1rio%20em%20iPhone%20e%20Android." target="_blank" rel="noopener">Quero o Curso 01</a>
+        </article>
+        <article class="course c02">
+          <span class="node" aria-hidden="true"></span>
+          <div class="top-row"><span class="num t-red">02</span><span class="tag">iPhone</span></div>
+          <span class="lvl">Intermediário avançado</span>
+          <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          <h3>Reparos de Placas iPhone</h3>
+          <p>O próximo passo para quem quer entrar no reparo de placas de iPhone.</p>
+          <a class="btn" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20Curso%2002%20%E2%80%93%20Intermedi%C3%A1rio%20Avan%C3%A7ado%20em%20Reparos%20de%20Placas%20iPhone." target="_blank" rel="noopener">Quero o Curso 02</a>
+        </article>
+        <article class="course c03">
+          <span class="node" aria-hidden="true"></span>
+          <div class="top-row"><span class="num t-red">03</span><span class="tag">iPhone</span></div>
+          <span class="lvl">Avançado</span>
+          <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          <h3>Reparos de Placas iPhone</h3>
+          <p>O nível mais alto da trilha: técnicas avançadas de reparo de placas de iPhone.</p>
+          <a class="btn" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20Curso%2003%20%E2%80%93%20Avan%C3%A7ado%20em%20Reparos%20de%20Placas%20iPhone." target="_blank" rel="noopener">Quero o Curso 03</a>
+        </article>
+        <article class="course c04">
+          <span class="node" aria-hidden="true"></span>
+          <div class="top-row"><span class="num t-red">04</span><span class="tag">Android</span></div>
+          <span class="lvl">Intermediário avançado</span>
+          <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          <h3>Reparos de Placas Android</h3>
+          <p>Reparo de placas Android, do intermediário ao avançado.</p>
+          <a class="btn btn-red" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20Curso%2004%20%E2%80%93%20Intermedi%C3%A1rio%20Avan%C3%A7ado%20em%20Reparos%20de%20Placas%20Android." target="_blank" rel="noopener">Quero o Curso 04</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÁTICA -->
+  <section class="section practice band-red" aria-labelledby="pratica-t">
+    <div class="wrap">
+      <div class="grid">
+        <div class="practice-media">
+          <div class="hud"><span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+            <div class="ph"><img src="media/pratica-bancadas.jpg" width="900" height="1125" loading="lazy" alt="Alunos lado a lado nas bancadas com microscópios e estações de solda"></div>
+          </div>
+        </div>
+        <div class="practice-copy">
+          <p class="eyebrow">Como são as aulas</p>
+          <h2 class="h2 t-white" id="pratica-t">Aqui você aprende na bancada</h2>
+          <p class="lead">A Master Cursos foi criada para formar profissionais preparados para os desafios do mercado de assistência técnica.</p>
+          <ul class="practice-list">
+            <li><span class="k">[01]</span><div><h3>Diagnóstico</h3><p>Descobrir o defeito com método.</p></div></li>
+            <li><span class="k">[02]</span><div><h3>Manutenção</h3><p>O dia a dia da assistência técnica em iPhone e Android.</p></div></li>
+            <li><span class="k">[03]</span><div><h3>Reparo de placas</h3><p>Dos primeiros passos às técnicas avançadas.</p></div></li>
+          </ul>
+          <div><a class="btn" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>Quero aprender na prática</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS (com som) -->
+  <section class="section" id="depoimentos" aria-labelledby="dep-t">
+    <div class="wrap carousel" data-carousel>
+      <div class="car-head">
+        <div class="txt">
+          <p class="eyebrow red">Depoimentos em vídeo · toque para ouvir</p>
+          <h2 class="h2 t-red" id="dep-t">O que os nossos alunos dizem?</h2>
+        </div>
+        <div class="car-ctrl">
+          <button class="car-btn" type="button" data-prev aria-label="Depoimento anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="car-count" aria-live="polite"><b data-cur>01</b> / <span data-total>07</span></span>
+          <button class="car-btn" type="button" data-next aria-label="Próximo depoimento"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="track-x" data-track>
+        <article class="vcard"><video src="media/depoimento-1.mp4" poster="media/depoimento-1.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 01 com som"><span class="tagline"><i></i>Depoimento 01</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 0:34</span></span></button></article>
+        <article class="vcard"><video src="media/depoimento-2.mp4" poster="media/depoimento-2.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 02 com som"><span class="tagline"><i></i>Depoimento 02</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 0:53</span></span></button></article>
+        <article class="vcard"><video src="media/depoimento-3.mp4" poster="media/depoimento-3.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 03 com som"><span class="tagline"><i></i>Depoimento 03</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 0:46</span></span></button></article>
+        <article class="vcard"><video src="media/depoimento-4.mp4" poster="media/depoimento-4.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 04 com som"><span class="tagline"><i></i>Depoimento 04</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 0:44</span></span></button></article>
+        <article class="vcard"><video src="media/depoimento-5.mp4" poster="media/depoimento-5.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 05 com som"><span class="tagline"><i></i>Depoimento 05</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 1:08</span></span></button></article>
+        <article class="vcard"><video src="media/depoimento-6.mp4" poster="media/depoimento-6.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 06 com som"><span class="tagline"><i></i>Depoimento 06</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 0:55</span></span></button></article>
+        <article class="vcard"><video src="media/depoimento-7.mp4" poster="media/depoimento-7.jpg" preload="none" playsinline width="540" height="960"></video>
+          <button class="play" type="button" aria-label="Assistir depoimento 07 com som"><span class="tagline"><i></i>Depoimento 07</span><span class="mid"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span><span class="bot"><b>Aluno Master Cursos</b><span>Com som · 0:53</span></span></button></article>
+      </div>
+      <div class="progress" aria-hidden="true"><i data-bar></i></div>
+    </div>
+  </section>
+
+  <!-- PROFESSOR -->
+  <section class="section prof band-blue" id="professor" aria-labelledby="prof-t">
+    <div class="wrap">
+      <div class="grid">
+        <div class="prof-photo">
+          <div class="hud"><span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+            <div class="ph"><img src="media/professor-marcondes.jpg" width="880" height="1100" loading="lazy" alt="Profº Marcondes sorrindo, com a camisa preta da Master Cursos, na recepção da escola"></div>
+            <div class="nameplate"><b>Profº Marcondes</b><span>Master Cursos</span></div>
+          </div>
+        </div>
+        <div class="prof-copy">
+          <p class="eyebrow">Seu professor · Certificação internacional</p>
+          <h2 class="h2 t-white" id="prof-t">Quem vai te ensinar: Profº Marcondes</h2>
+          <blockquote class="quote">Nosso compromisso é compartilhar conhecimento, desenvolver talentos e preparar nossos alunos para conquistar novas oportunidades profissionais.</blockquote>
+          <div class="prof-cert">
+            <h3 class="prof-cert-t">Certificação internacional</h3>
+            <p>O Profº Marcondes tem certificação internacional, reconhecida em cinco países.</p>
+            <ul class="countries" aria-label="Países da certificação do Profº Marcondes">
+            <li><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="24" fill="#009C3B"/><path d="M18 3 33 12 18 21 3 12Z" fill="#FFDF00"/><circle cx="18" cy="12" r="5.2" fill="#002776"/></svg><span>Brasil</span></li>
+            <li><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="12" fill="#FCD116"/><rect y="12" width="36" height="6" fill="#003893"/><rect y="18" width="36" height="6" fill="#CE1126"/></svg><span>Colômbia</span></li>
+            <li><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="24" fill="#DE2910"/><path d="m7 3.5 1.2 3.6H12l-3 2.2 1.1 3.6L7 10.7l-3.1 2.2L5 9.3 2 7.1h3.8Z" fill="#FFDE00"/><circle cx="14" cy="3.5" r="1" fill="#FFDE00"/><circle cx="16" cy="6.5" r="1" fill="#FFDE00"/><circle cx="16" cy="10" r="1" fill="#FFDE00"/><circle cx="14" cy="13" r="1" fill="#FFDE00"/></svg><span>China</span></li>
+            <li><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="8" fill="#D52B1E"/><rect y="8" width="36" height="8" fill="#fff"/><rect y="16" width="36" height="8" fill="#0038A8"/><circle cx="18" cy="12" r="2.6" fill="none" stroke="#0038A8" stroke-width=".8"/></svg><span>Paraguai</span></li>
+            <li><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="24" fill="#74ACDF"/><rect y="8" width="36" height="8" fill="#fff"/><circle cx="18" cy="12" r="2.4" fill="#F6B40E"/></svg><span>Argentina</span></li>
+          </ul>
+          </div>
+          <div><a class="btn btn-red" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>Aprender com o Profº Marcondes</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VÍDEOS DAS AULAS (sem som) -->
+  <section class="section" id="aulas" aria-labelledby="aulas-t">
+    <div class="wrap carousel" data-carousel>
+      <div class="car-head">
+        <div class="txt">
+          <p class="eyebrow">Registros das turmas</p>
+          <h2 class="h2 t-white" id="aulas-t">Aula a aula, na bancada</h2>
+          <p class="lead">Veja como são as aulas no laboratório da Master Cursos.</p>
+        </div>
+        <div class="car-ctrl">
+          <button class="car-btn" type="button" data-prev aria-label="Vídeo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="car-count" aria-live="polite"><b data-cur>01</b> / <span data-total>11</span></span>
+          <button class="car-btn" type="button" data-next aria-label="Próximo vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="track-x" data-track>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-1.mp4" poster="media/aluno-1.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 01 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 01</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-2.mp4" poster="media/aluno-2.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 02 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 02</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-3.mp4" poster="media/aluno-3.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 03 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 03</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-4.mp4" poster="media/aluno-4.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 04 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 04</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-5.mp4" poster="media/aluno-5.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 05 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 05</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-6.mp4" poster="media/aluno-6.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 06 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 06</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-7.mp4" poster="media/aluno-7.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 07 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 07</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-8.mp4" poster="media/aluno-8.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 08 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 08</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-9.mp4" poster="media/aluno-9.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 09 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 09</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-10.mp4" poster="media/aluno-10.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 10 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 10</span></figure>
+        <figure class="mcard" style="margin:0"><video src="media/aluno-11.mp4" poster="media/aluno-11.jpg" muted loop playsinline preload="none" width="432" height="768" aria-label="Vídeo 11 de aula na Master Cursos, sem som"></video><span class="lbl"><i></i>AULA · 11</span></figure>
+      </div>
+      <div class="progress" aria-hidden="true"><i data-bar></i></div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="section" id="laboratorio" aria-labelledby="lab-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:var(--s6)">
+        <p class="eyebrow">Por dentro da escola</p>
+        <h2 class="h2 t-blue" id="lab-t">Laboratório montado para você praticar</h2>
+        <p class="lead">Bancadas equipadas, microscópios e turmas formadas na Master Cursos.</p>
+      </div>
+      <div class="gal-feat">
+        <figure><img src="media/destaque-aula.jpg" width="1400" height="1050" loading="lazy" alt="Turma assistindo à aula no laboratório, com os telões mostrando a placa em tempo real"><figcaption>Aula no laboratório</figcaption></figure>
+        <figure><img src="media/destaque-turma.jpg" width="1400" height="1050" loading="lazy" alt="Profº Marcondes em pé conversando com a turma diante do quadro com anotações técnicas"><figcaption>Profº Marcondes com a turma</figcaption></figure>
+      </div>
+      <div class="gal-grid">
+        <figure><img src="media/galeria-1.jpg" width="640" height="800" loading="lazy" alt="Aluno soldando componente em placa de iPhone sob o microscópio"></figure>
+        <figure><img src="media/galeria-2.jpg" width="640" height="800" loading="lazy" alt="Turma formada segurando os certificados"></figure>
+        <figure><img src="media/galeria-3.jpg" width="640" height="800" loading="lazy" alt="Alunos sentados acompanhando a explicação no laboratório"></figure>
+        <figure><img src="media/galeria-4.jpg" width="640" height="800" loading="lazy" alt="Instrutor demonstrando um reparo na bancada para a turma"></figure>
+        <figure><img src="media/galeria-5.jpg" width="640" height="800" loading="lazy" alt="Turma ouvindo a explicação em pé no laboratório"></figure>
+        <figure><img src="media/galeria-6.jpg" width="640" height="800" loading="lazy" alt="Grande turma reunida com certificados em frente aos telões"></figure>
+        <figure><img src="media/galeria-7.jpg" width="640" height="800" loading="lazy" alt="Aula com conteúdo técnico projetado nos telões"></figure>
+        <figure><img src="media/galeria-8.jpg" width="640" height="800" loading="lazy" alt="Alunos acompanhando demonstração no microscópio"></figure>
+        <figure><img src="media/galeria-9.jpg" width="640" height="800" loading="lazy" alt="Corredor do laboratório com bancadas dos dois lados e professor à frente"></figure>
+        <figure><img src="media/galeria-10.jpg" width="640" height="800" loading="lazy" alt="Turma comemorando com certificados de conclusão"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="duvidas" aria-labelledby="faq-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="grid">
+        <div class="faq-head">
+          <p class="eyebrow">Antes de se inscrever</p>
+          <h2 class="h2 t-white" id="faq-t">Dúvidas frequentes</h2>
+          <p class="lead">Não achou sua resposta? Chame a gente no WhatsApp.</p>
+        </div>
+        <div class="faq-list">
+          <details><summary><span><span class="q">Q.01</span>Nunca mexi em celular. Consigo acompanhar?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Sim. O Curso 01 começa dos primeiros passos e leva você até o nível intermediário em iPhone e Android.</p></div></details>
+          <details><summary><span><span class="q">Q.02</span>Já sou técnico. Não vai ser básico demais?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Os Cursos 02, 03 e 04 são de reparo de placas, do intermediário avançado ao avançado, em iPhone e Android.</p></div></details>
+          <details><summary><span><span class="q">Q.03</span>As aulas são só teoria?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Não. Os cursos têm foco na prática: diagnóstico, manutenção e reparo de smartphones.</p></div></details>
+          <details><summary><span><span class="q">Q.04</span>O professor tem certificação?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Sim. O Profº Marcondes tem certificação internacional, reconhecida no Brasil, Colômbia, China, Paraguai e Argentina.</p></div></details>
+          <details><summary><span><span class="q">Q.05</span>Quem dá as aulas?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>O Profº Marcondes, na escola em Paulista.</p></div></details>
+          <details><summary><span><span class="q">Q.06</span>Onde fica a escola?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Rua do Sossego, nº 33, Centro, Paulista – PE.</p><a class="link-arrow" href="#local">Ver no mapa <span aria-hidden="true">↓</span></a></div></details>
+          <details><summary><span><span class="q">Q.07</span>Quanto custa e quais são os horários?</span><span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Tire suas dúvidas sobre turmas e valores direto com a gente no WhatsApp.</p><a class="btn btn-red btn-sm" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>Perguntar turmas e valores</a></div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section" aria-labelledby="final-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="final-box">
+        <div class="final-bg" aria-hidden="true"><img src="media/cta-aula.jpg" width="1200" height="1500" loading="lazy" alt=""></div>
+        <div class="final-in">
+          <p class="eyebrow red">Vagas pelo WhatsApp</p>
+          <h2 class="motto" id="final-t"><span class="t-red">Aprenda na prática.</span><span class="t-white">Evolua como profissional.</span><span class="t-blue">Conquiste seu espaço no mercado.</span></h2>
+          <div class="final-row">
+            <a class="btn btn-red" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>Garantir minha vaga no WhatsApp</a>
+            <p>Tire suas dúvidas sobre turmas e valores direto com a gente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section class="section local" id="local" aria-labelledby="local-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="grid">
+        <div class="local-info">
+          <p class="eyebrow">Localização</p>
+          <h2 class="h2 t-white" id="local-t">Venha conhecer a escola</h2>
+          <div class="info-list">
+            <div class="info"><span class="k">Endereço</span><span class="v">Rua do Sossego, nº 33<br>Centro, Paulista – PE</span></div>
+            <div class="info"><span class="k">WhatsApp</span><a class="v" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener">(81) 98681-7602</a></div>
+            <div class="info"><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/master_cursos_pe" target="_blank" rel="noopener">@master_cursos_pe</a></div>
+          </div>
+          <div class="nav-btns">
+            <a class="btn" href="https://maps.google.com/?q=-7.942456,-34.881676" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Abrir no Google Maps</a>
+            <a class="btn btn-red" href="https://waze.com/ul?ll=-7.942456,-34.881676&amp;navigate=yes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11 21 3l-8 18-2-8-8-2Z"/></svg>Abrir no Waze</a>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <div class="hud" style="height:100%"><span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+            <div class="map" id="map">
+              <div class="map-fallback" aria-hidden="true">
+                <svg viewBox="0 0 700 460" preserveAspectRatio="xMidYMid slice">
+                  <rect width="700" height="460" fill="#0A0C12"/>
+                  <g stroke="#1B2030" stroke-width="1"><path d="M0 40H700M0 80H700M0 120H700M0 160H700M0 200H700M0 240H700M0 280H700M0 320H700M0 360H700M0 400H700M0 440H700"/><path d="M40 0V460M80 0V460M120 0V460M160 0V460M200 0V460M240 0V460M280 0V460M320 0V460M360 0V460M400 0V460M440 0V460M480 0V460M520 0V460M560 0V460M600 0V460M640 0V460M680 0V460"/></g>
+                  <g stroke="#2A3145" stroke-width="10" fill="none" stroke-linecap="round"><path d="M-20 300 C 150 270, 260 250, 350 230 S 560 170, 720 120"/><path d="M220 -20 L 300 480"/><path d="M480 -20 C 460 120, 440 260, 470 480"/></g>
+                  <g stroke="#1E2434" stroke-width="5" fill="none"><path d="M0 120 H 260 L 340 200"/><path d="M380 260 L 600 330 H 720"/><path d="M90 480 L 160 330 L 230 300"/><path d="M560 0 L 520 150"/></g>
+                </svg>
+              </div>
+              <div class="pin" aria-hidden="true"><span class="ring"></span><span class="ring b"></span><span class="shadow"></span><span class="body"></span></div>
+              <span class="coord"><b>LAT</b> -7.942456 · <b>LON</b> -34.881676</span>
+              <div class="addr-chip"><span>Master Cursos · Rua do Sossego, 33</span><span>Centro, Paulista – PE</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="media/logo.jpg" width="640" height="380" alt="Master Cursos" loading="lazy">
+    <span>Escola Master Cursos · Centro de Capacitação em Smartphones · Rua do Sossego, nº 33, Centro, Paulista – PE</span>
+    <div class="soc">
+      <a href="https://www.instagram.com/master_cursos_pe" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61566841841194" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<a class="btn fab" id="fab" href="https://wa.me/5581986817602?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Master%20Cursos." target="_blank" rel="noopener" aria-label="Falar com a Master Cursos no WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.5 28.5l6.4-1.7A12.5 12.5 0 1 0 16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path transform="translate(9.2 9.2) scale(.58)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg></a>
+
+<script>
+(function(){
+  /* Mapa real do Google quando a página estiver hospedada no seu domínio */
+  try{
+    var host=location.hostname||'';
+    if(/^https?:$/.test(location.protocol) && !/claude/i.test(host)){
+      var m=document.getElementById('map'),f=document.createElement('iframe');
+      f.src='https://maps.google.com/maps?q=-7.942456,-34.881676&z=17&output=embed';
+      f.title='Mapa da Master Cursos, Rua do Sossego 33, Centro, Paulista';
+      f.loading='lazy';f.referrerPolicy='no-referrer-when-downgrade';
+      m.insertBefore(f,m.querySelector('.pin'));
+    }
+  }catch(e){}
+
+  /* Carrosséis */
+  document.querySelectorAll('[data-carousel]').forEach(function(c){
+    var t=c.querySelector('[data-track]'),items=t.children,n=items.length;
+    var cur=c.querySelector('[data-cur]'),bar=c.querySelector('[data-bar]'),prev=c.querySelector('[data-prev]'),next=c.querySelector('[data-next]');
+    c.querySelector('[data-total]').textContent=String(n).padStart(2,'0');
+    function step(){return items[0].getBoundingClientRect().width+parseFloat(getComputedStyle(t).columnGap||0)}
+    function upd(){
+      var s=step(),i=Math.round(t.scrollLeft/s),max=t.scrollWidth-t.clientWidth;
+      cur.textContent=String(Math.min(i+1,n)).padStart(2,'0');
+      var vis=Math.max(1,Math.round(t.clientWidth/s));
+      bar.style.width=(100*vis/n)+'%';
+      bar.style.transform='translateX('+(max>0?(t.scrollLeft/max)*(n/vis-1)*100:0)+'%)';
+      prev.disabled=t.scrollLeft<4;next.disabled=t.scrollLeft>max-4;
+    }
+    prev.addEventListener('click',function(){t.scrollBy({left:-step(),behavior:'smooth'})});
+    next.addEventListener('click',function(){t.scrollBy({left:step(),behavior:'smooth'})});
+    t.addEventListener('scroll',function(){requestAnimationFrame(upd)},{passive:true});
+    window.addEventListener('resize',upd);upd();
+  });
+
+  /* Depoimentos: tocar com som, um por vez */
+  var dvids=[].slice.call(document.querySelectorAll('.vcard video'));
+  document.querySelectorAll('.vcard .play').forEach(function(b){
+    b.addEventListener('click',function(){
+      var card=b.closest('.vcard'),v=card.querySelector('video');
+      dvids.forEach(function(o){if(o!==v){o.pause();}});
+      card.classList.add('on');v.muted=false;v.controls=true;
+      var p=v.play();if(p&&p.catch)p.catch(function(){});
+    });
+  });
+  dvids.forEach(function(v){v.addEventListener('play',function(){dvids.forEach(function(o){if(o!==v)o.pause()})})});
+
+  /* Vídeos das aulas: sem som, tocam só quando visíveis */
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mv=document.querySelectorAll('.mcard video');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){if(v.preload==='none')v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{threshold:.4});
+    mv.forEach(function(v){io.observe(v)});
+  }
+
+
+  /* Trilhas laterais: movem com a rolagem (rAF, só transform) */
+  var rails=[].slice.call(document.querySelectorAll('.rail svg')),rp=[].slice.call(document.querySelectorAll('.rail .rp'));
+  var ticking=false,last=window.scrollY;
+  function railUpd(){ticking=false;var y=window.scrollY;
+    rails.forEach(function(s,i){var sp=i===0?.22:.32;s.style.transform='translate3d(0,'+(-((y*sp)%800))+'px,0)'});
+    rp.forEach(function(p,i){p.style.setProperty('--o',(-(y*(0.9+(i%3)*.25))).toFixed(1))});
+    last=y;}
+  if(!reduce){window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(railUpd)}},{passive:true});railUpd();}
+
+  /* Revelação das seções */
+  if('IntersectionObserver' in window && !reduce){
+    var els=document.querySelectorAll('.sec-head,.car-head,.course,.gal-feat figure,.gal-grid figure,.practice-copy,.prof-copy,.cert-copy,.faq-list,.final-in,.local-info,.map-wrap');
+    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');ro.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el,i){var r=el.getBoundingClientRect();if(r.top>innerHeight){el.classList.add('rv','pre');el.style.transitionDelay=((i%5)*60)+'ms';ro.observe(el)}});
+  }
+
+  /* Barramento dos cursos: distância do pulso */
+  function busW(){var t=document.querySelector('#cursos .track');if(t)t.style.setProperty('--bus-w',(t.clientWidth*.75-40)+'px')}
+  window.addEventListener('resize',busW);busW();
+
+  /* Botão flutuante some no hero e no rodapé */
+  var fab=document.getElementById('fab');
+  if(fab&&'IntersectionObserver' in window){
+    var hv=true,fv=false;function u(){fab.classList.toggle('off',hv||fv)}
+    new IntersectionObserver(function(e){hv=e[0].isIntersecting;u()}).observe(document.querySelector('.hero'));
+    new IntersectionObserver(function(e){fv=e[0].isIntersecting;u()}).observe(document.querySelector('footer'));u();
+  }
+})();
+</script>
+
+</body></html>
+</body>
+</html>
